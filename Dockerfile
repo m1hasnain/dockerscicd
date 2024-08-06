@@ -1,20 +1,14 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.9-slim
+FROM python:2.7-alpine
 
-# Set the working directory in the container
+RUN mkdir /app
 WORKDIR /app
 
-# Copy the requirements file into the container
-COPY requirements.txt .
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
-# Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
 
-# Copy the rest of the application code into the container
-COPY app.py .
+LABEL maintainer="WebMagic Informatica <info@webmagicinformatica.com>" \
+      version="1.0"
 
-# Expose port 80
-EXPOSE 80
-
-# Define the command to run the application
-CMD ["python", "app.py"]
+CMD flask run --host=0.0.0.0 --port=5000
