@@ -31,8 +31,10 @@ jobs:
         run: |
           docker build -t my-first-cicdimage .
 
+      - name: Tag Docker image
+        run: |
+          docker tag my-first-cicdimage ${{ secrets.DOCKER_USERNAME }}/my-first-cicdimage:latest
+
       - name: Push Docker image
         run: |
-          docker tag my-first-cicdimage ${{ secrets.DOCKER_HUB_USERNAME }}/my-first-cicdimage:v1
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/my-first-cicdimage:v1
-
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-first-cicdimage:latest
