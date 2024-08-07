@@ -1,4 +1,4 @@
 FROM ubuntu
 MAINTAINER Admin
-RUN yum update -y
+RUN yum install httpd
 CMD ["echo", "Hello World"] 
